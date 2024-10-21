@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,9 +16,12 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['staff', 'admin', 'supervisor'],
-    default: 'staff',
+    enum: ["staff", "admin", "supervisor"],
+    default: "staff",
   },
+  supervisors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  peers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  juniors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
